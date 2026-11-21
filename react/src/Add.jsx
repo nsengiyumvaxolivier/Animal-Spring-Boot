@@ -6,8 +6,9 @@ function Add() {
         name:"",
         type:""
     })
+    const API=import.meta.env.VITE_API_URL;
     const saveAnimal =()=>{
-        axios.post("http://localhost:8080/add-animal",animal)
+        axios.post(`${API}/add-animal`,animal)
         .then(res=>{
             alert(res.data);
         })

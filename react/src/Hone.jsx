@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+const API = import.meta.env.VITE_API_URL;
+
+
 
 function Hone() {
     const [animals,setAnimals]=useState([]);
     useEffect(()=>{
-        axios.get("http://localhost:8080/")
+        axios.get(`${API}/`)
         .then(res=>{
             setAnimals(res.data);
         })

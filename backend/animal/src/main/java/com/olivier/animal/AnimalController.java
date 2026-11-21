@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173","https://animal-spring-boot.vercel.app"})
 @RestController 
 public class AnimalController {
     private final AnimalService animalservice;

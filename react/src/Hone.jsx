@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const API = import.meta.env.VITE_API_URL;
 
 
 
 function Hone() {
+    const location=useNavigate();
     const [animals,setAnimals]=useState([]);
     useEffect(()=>{
         axios.get(`${API}/`)
@@ -13,10 +14,28 @@ function Hone() {
             setAnimals(res.data);
         })
     },[])
+
+    const API=import.meta.env.VITE_API_URL;
+
+    const deleteAnimal =(id)=>{
+        const yesDelete = confirm("Delete Animal");
+        if (yesDelete) {
+            axios.delete(`${API}/animal/${id}`)
+            .then(res=>{
+                alert(res.data);
+                setAnimals(animals.filter(a=> a.id != id));
+            })
+            return 0;
+        }
+        else{
+            location("/");
+            return 0;
+        }
+    }
   return (
     <>
-    <div className="conatiner-fluid h-screen w-full bg-blue-800 justify-center flex ">
-        <div className="conatiner bg-white p-2 rounded w-1/2 m-auto">
+    <div className="conatiner-fluid h-screen w-full bg-blue-800  p-2 py-4">
+        <div className="conatiner bg-white p-2 rounded w-full md:w-1/2 m-auto">
         <div className="flex p-2 justify-between"><h1 className='p-1 font-bold text-sm'>Animal List</h1>
         <Link to="/Add-Animal" className='bg-blue-500 text-sm p-1 font-bold rounded text-white'> Add Animal</Link> </div>
         <hr  className='p-1'/>
@@ -33,7 +52,10 @@ function Hone() {
                                 <td>{index+1}</td>
                                 <td>{a.name}</td>
                                 <td>{a.type}</td>
-                                <td> <Link to={"/view/"+a.id} className='bg-blue-700 text-sm p-1 font-bold rounded text-white'> View</Link></td>
+                                <td className='flex w-full justify-end'> 
+                                    <Link to={"/Edit/"+a.id} className='bg-blue-700 text-sm p-1 font-bold rounded text-white mx-2'> Edit</Link>
+                                    <button className='bg-red-700 text-sm p-1 font-bold rounded text-white cursor-pointer' onClick={()=>deleteAnimal(a.id)}> Delete</button>
+                                    </td>
                             </tr>
 
                         ))

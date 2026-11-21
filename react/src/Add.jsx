@@ -15,8 +15,8 @@ function Add() {
     }
   return (
     <>
-    <div className="container-fluid bg-blue-800 flex justify-center h-screen w-full">
-<div className="conatiner bg-white p-2 rounded w-1/4 m-auto">
+    <div className="container-fluid bg-blue-800  p-2 h-screen w-full py-4">
+<div className="conatiner bg-white p-2 rounded w-full md:w-1/4 m-auto">
 <div className="flex p-1 justify-between"><h1 className='p-1 font-bold text-sm'>Add Animal</h1>
  <Link to="/" className='bg-gray-500 text-sm p-1 font-bold rounded text-white'> Back</Link>
 </div>
